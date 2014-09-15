@@ -44,6 +44,16 @@ Integrates into the Todo programming challenge API using jquery.
       error:   function(xhr)  { alert('logout error!') }
     });
 ```
+*Create a new user*
+
+```javascript
+  Todo.createUser({
+    email:    theEmail,
+    password: thePassword,
+    success:  function(user) { alert('user create success!') },
+    error:    function(xhr)  { alert('user create error!') }
+  });
+```
 ## Installation
 
 The easiest way to use this library in your project is to include it as a git submodule.
