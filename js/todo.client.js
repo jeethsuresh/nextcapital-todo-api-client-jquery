@@ -2,7 +2,7 @@ Todo = {
   USER: null,
 
   config: {
-    host: 'http://recruiting-api.nextcapital.com'
+    host: 'http://localhost:3000'
   },
 
   endSession: function(options) {
@@ -26,25 +26,7 @@ Todo = {
   },
 
   startSession: function(options) {
-    var email    = options.email;
-    var password = options.password;
-    var success  = options.success;
-    var error    = options.error;
-
-    var successCallback = function(user) {
-      Todo.USER = user;
-
-      if(success) {
-        success(user);
-      }
-    };
-
-    $.ajax([Todo.config.host, 'users/sign_in' ].join('/'), {
-      data:    { email: email, password: password },
-      type:    'POST',
-      success: successCallback,
-      error:   error
-    });
+    this._postUser(options, [Todo.config.host, 'users/sign_in' ].join('/'));
   },
 
   loadTodos: function(options) {
@@ -72,6 +54,32 @@ Todo = {
       data:    { todo: data, api_token: apiToken },
       type:    'PUT',
       success: success,
+      error:   error
+    });
+  },
+
+  createUser: function(options) {
+    this._postUser(options, [Todo.config.host, 'users' ].join('/'));
+  },
+
+  _postUser: function(options, route) {
+    var email    = options.email;
+    var password = options.password;
+    var success  = options.success;
+    var error    = options.error;
+
+    var successCallback = function(user) {
+      Todo.USER = user;
+
+      if(success) {
+        success(user);
+      }
+    };
+
+    $.ajax(route, {
+      data:    { email: email, password: password },
+      type:    'POST',
+      success: successCallback,
       error:   error
     });
   }
