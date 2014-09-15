@@ -19,7 +19,7 @@ Todo = {
         success: success,
         error:   error
       });
-      Todo.USER.null;
+      Todo.USER = null;
     } else {
       success();
     }
