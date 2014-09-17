@@ -2,7 +2,7 @@ Todo = {
   USER: null,
 
   config: {
-    host: 'http://localhost:3000'
+    host: 'http://recruiting-api.nextcapital.com'
   },
 
   endSession: function(options) {
