@@ -28,7 +28,22 @@ Todo = {
   startSession: function(options) {
     this._postUser(options, [Todo.config.host, 'users/sign_in' ].join('/'));
   },
+  
+  createTodo: function(options){
+    var userid = Todo.USER.id;
+    var apitoken = Todo.USER.api_token;
+    var describe = {"description":options.description};
+    var success = options.success;
+    var error = options.error;
 
+    $.ajax([Todo.config.host, 'users', userid, 'todos'].join('/'),{
+      data: {api_token: apitoken, todo: describe},
+      type: 'POST',
+      success: success,
+      error: error
+    });
+
+  },
   loadTodos: function(options) {
     var apiToken = Todo.USER.api_token;
     var userId   = Todo.USER.id;
